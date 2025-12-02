@@ -1,0 +1,122 @@
+﻿@model CustomerManagement.ViewModels.CreateCustomerViewModel
+
+@{
+    ViewData["Title"] = "Create Customer";
+}
+
+<h2>Create Customer</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<form asp-action="Create" method="post">
+
+    <!-- Hebrew Full Name -->
+    <div class="mb-3">
+        <label asp-for="FullNameHeb" class="form-label"></label>
+        <input asp-for="FullNameHeb" class="form-control" />
+        <span asp-validation-for="FullNameHeb" class="text-danger"></span>
+    </div>
+
+    <!-- English Full Name -->
+    <div class="mb-3">
+        <label asp-for="FullNameEng" class="form-label"></label>
+        <input asp-for="FullNameEng" class="form-control" />
+        <span asp-validation-for="FullNameEng" class="text-danger"></span>
+    </div>
+
+    <!-- Birth Date -->
+    <div class="mb-3">
+        <label asp-for="BirthDate" class="form-label"></label>
+        <input asp-for="BirthDate" type="date" class="form-control" />
+        <span asp-validation-for="BirthDate" class="text-danger"></span>
+    </div>
+
+    <!-- ID Number -->
+    <div class="mb-3">
+        <label asp-for="IdNumber" class="form-label"></label>
+        <input asp-for="IdNumber" class="form-control" />
+        <span asp-validation-for="IdNumber" class="text-danger"></span>
+    </div>
+
+    <!-- City Dropdown -->
+    <div class="mb-3">
+        <label asp-for="CityId" class="form-label"></label>
+        <select asp-for="CityId" class="form-select"
+                asp-items="@(new SelectList(Model.Cities, "Id", "Name"))">
+            <option value="">-- Select City --</option>
+        </select>
+        <span asp-validation-for="CityId" class="text-danger"></span>
+    </div>
+
+    <!-- Bank Dropdown -->
+    <div class="mb-3">
+        <label asp-for="BankId" class="form-label"></label>
+        <select asp-for="BankId" class="form-select" id="bankDropdown">
+            <option value="">-- Select Bank --</option>
+            @foreach (var bank in Model.Banks)
+            {
+                <option value="@bank.Code">@bank.Description</option>
+            }
+        </select>
+        <span asp-validation-for="BankId" class="text-danger"></span>
+    </div>
+
+    <!-- Branch Dropdown -->
+    <div class="mb-3">
+        <label asp-for="BranchId" class="form-label"></label>
+        <select asp-for="BranchId" class="form-select" id="branchDropdown" disabled>
+            <option value="">-- Select Branch --</option>
+            @foreach (var branch in Model.Branches)
+            {
+                <option value="@branch.BranchNumber">@branch.BranchName</option>
+            }
+        </select>
+        <span asp-validation-for="BranchId" class="text-danger"></span>
+    </div>
+
+    <!-- Account Number -->
+    <div class="mb-3">
+        <label asp-for="AccountNumber" class="form-label"></label>
+        <input asp-for="AccountNumber" class="form-control" />
+        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Customer</button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.getElementById("bankDropdown").addEventListener("change", async function () {
+            let bankCode = this.value;
+            let branchDropdown = document.getElementById("branchDropdown");
+
+            branchDropdown.innerHTML = "<option>Loading...</option>";
+
+            if (!bankCode) {
+                branchDropdown.disabled = true;
+                branchDropdown.innerHTML = "<option value=''>-- Select Branch --</option>";
+                return;
+            }
+
+            branchDropdown.disabled = false;
+
+            // Fetch branches from server
+            let response = await fetch(`/Customers/GetBranches?bankCode=${bankCode}`);
+            let branches = await response.json();
+
+            branchDropdown.innerHTML = "<option value=''>-- Select Branch --</option>";
+
+            branches.forEach(b => {
+                branchDropdown.innerHTML += `<option value="${b.branchCode}">${b.branchName}</option>`;
+            });
+        });
+    </script>
+}
