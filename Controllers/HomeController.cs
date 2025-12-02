@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using CustomerManagement.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace CustomerManagement.Controllers
 {

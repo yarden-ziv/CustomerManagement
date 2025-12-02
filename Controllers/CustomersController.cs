@@ -4,7 +4,7 @@ using CustomerManagement.Models.Dto;
 using CustomerManagement.Services;
 using CustomerManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerManagement.Controllers
 {
@@ -24,30 +24,62 @@ namespace CustomerManagement.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var customers = await _context.Customers
+                .Include(c => c.City)
+                .ToListAsync();
+
+            return View(customers);
+        }
+
         // GET: /Customers/Create
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            var cities = await _cityService.GetCitiesAsync();
+            var banks = await _bankService.GetBanksAsync();
+
             var vm = new CreateCustomerViewModel
             {
-                Cities = await _cityService.GetCitiesAsync(),
-                Banks = await _bankService.GetBanksAsync(),
-                Branches = new List<BranchDto>() // empty until bank is selected
+                // SORT CITIES
+                Cities = cities.OrderBy(c => c.Name).ToList(),
+
+                // SORT BANKS
+                Banks = banks.OrderBy(b => b.Description).ToList(),
+
+                // Branches empty until bank is selected
+                Branches = new List<BranchDto>()
             };
 
             return View(vm);
         }
 
+
         // POST: /Customers/Create
         [HttpPost]
         public async Task<IActionResult> Create(CreateCustomerViewModel vm)
         {
+            foreach (var item in ModelState)
+            {
+                foreach (var error in item.Value.Errors)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"MODEL ERROR: Key = {item.Key}, Error = {error.ErrorMessage}");
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 // Reload dropdowns because they are not part of the POSTed model
                 vm.Cities = await _cityService.GetCitiesAsync();
                 vm.Banks = await _bankService.GetBanksAsync();
                 vm.Branches = await _bankService.GetBranchesAsync(vm.BankId);
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                   .Select(e => e.ErrorMessage)
+                                   .ToList();
 
                 return View(vm);
             }
@@ -61,7 +93,7 @@ namespace CustomerManagement.Controllers
                 IdNumber = vm.IdNumber,
                 CityId = vm.CityId,
                 BankId = vm.BankId,
-                BranchId = vm.BranchId,
+                BranchId = vm.BranchId.Value,
                 AccountNumber = vm.AccountNumber
             };
 
@@ -70,7 +102,7 @@ namespace CustomerManagement.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Success"] = "הלקוח נוצר בהצלחה!";
-            return RedirectToAction("Create");
+            return RedirectToAction("List");
         }
 
         public async Task<IActionResult> GetBranches(int bankCode)

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CustomerManagement.Models;
+﻿using CustomerManagement.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerManagement.Data
 {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using CustomerManagement.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using CustomerManagement.Models;
 using CustomerManagement.Models.Dto;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+
 
 
 namespace CustomerManagement.ViewModels
@@ -39,18 +39,21 @@ namespace CustomerManagement.ViewModels
         [Required(ErrorMessage = "יש לבחור עיר")]
         [Display(Name = "עיר")]
         public int CityId { get; set; }
+        [ValidateNever]
         public List<City> Cities { get; set; }
 
         // --- Bank ---
         [Required(ErrorMessage = "יש לבחור בנק")]
         [Display(Name = "בנק")]
         public int BankId { get; set; }
+        [ValidateNever]
         public List<BankDto> Banks { get; set; }
 
         // --- Branch ---
         [Required(ErrorMessage = "יש לבחור סניף")]
         [Display(Name = "סניף")]
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
+        [ValidateNever]
         public List<BranchDto> Branches { get; set; }
 
         // --- Account Number ---

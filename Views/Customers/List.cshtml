@@ -1,0 +1,39 @@
+﻿@model List<CustomerManagement.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer List";
+}
+
+<h2>רשימת לקוחות</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>שם מלא בעברית</th>
+            <th>שם מלא באנגלית</th>
+            <th>מספר ת"ז</th>
+            <th>תאריך לידה</th>
+            <th>עיר</th>
+            <th>בנק</th>
+            <th>סניף</th>
+            <th>מספר חשבון</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.FullNameHeb</td>
+                <td>@c.FullNameEng</td>
+                <td>@c.IdNumber</td>
+                <td>@c.BirthDate.ToString("yyyy-MM-dd")</td>
+                <td>@c.City?.Name</td>
+                <td>@c.BankId</td>
+                <td>@c.BranchId</td>
+                <td>@c.AccountNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="/Customers/Create">+ הוסף לקוח חדש</a>

@@ -29,3 +29,61 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Phoenix Investments color palette */
+:root {
+    --primary-blue: #142665;
+    --primary-orange: #E95B2B;
+    --white: #ffffff;
+}
+
+/* Apply background */
+body {
+    background-color: var(--primary-blue);
+    color: var(--white);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-orange);
+    border-color: var(--primary-orange);
+}
+
+    .btn-primary:hover {
+        background-color: #c94c23;
+        border-color: #c94c23;
+    }
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    border-color: var(--white);
+}
+
+    .btn-secondary:hover {
+        background-color: #e8e8e8;
+    }
+
+.btn-back {
+    background-color: white;
+    color: var(--primary-blue);
+    border: 2px solid white;
+    font-weight: 600;
+}
+
+    .btn-back:hover {
+        background-color: #f3f3f3;
+        color: var(--primary-blue);
+    }
+
+
+/* Tables */
+table.table {
+    background-color: var(--white);
+    color: var(--primary-blue);
+}
+
+    table.table thead {
+        background-color: var(--primary-orange);
+        color: var(--white);
+    }
