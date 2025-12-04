@@ -15,7 +15,7 @@ A SQL Server Stored Procedure for loading customers efficiently
 
 This project was designed as a real-world style assignment demonstrating backend development, database architecture, external API consumption, XML tooling, and UI implementation.
 
-Project Structure
+## 📁 Project Structure
 
 ```
 CustomerManagement/
@@ -36,6 +36,7 @@ CustomerManagement/
     ├── Program.cs
     └── CustomerImport.csproj
 ```
+
 
 Features
 ASP.NET MVC Web Application
