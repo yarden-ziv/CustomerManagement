@@ -25,5 +25,6 @@ namespace CustomerManagement.Data
             );
         }
 
+        public DbSet<CustomerListItem> CustomerListItems { get; set; }
     }
 }

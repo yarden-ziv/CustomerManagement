@@ -25,11 +25,21 @@ namespace CustomerManagement.Controllers
         }
 
         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> List()
         {
-            var customers = await _context.Customers
-                .Include(c => c.City)
+            var customers = await _context.CustomerListItems
+                .FromSqlRaw("EXEC GetAllCustomers")
                 .ToListAsync();
+
+            // Load bank list from API
+            var banks = await _bankService.GetBanksAsync();
+
+            // Match BankId → BankName
+            foreach (var c in customers)
+            {
+                c.BankName = banks.FirstOrDefault(b => b.Code == c.BankId)?.Description;
+            }
 
             return View(customers);
         }

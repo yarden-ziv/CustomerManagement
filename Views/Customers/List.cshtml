@@ -1,4 +1,5 @@
-﻿@model List<CustomerManagement.Models.Customer>
+﻿@model List<CustomerManagement.Models.CustomerListItem>
+
 
 @{
     ViewData["Title"] = "Customer List";
@@ -27,8 +28,8 @@
                 <td>@c.FullNameEng</td>
                 <td>@c.IdNumber</td>
                 <td>@c.BirthDate.ToString("yyyy-MM-dd")</td>
-                <td>@c.City?.Name</td>
-                <td>@c.BankId</td>
+                <td>@c.CityName</td>
+                <td>@c.BankName</td>
                 <td>@c.BranchId</td>
                 <td>@c.AccountNumber</td>
             </tr>

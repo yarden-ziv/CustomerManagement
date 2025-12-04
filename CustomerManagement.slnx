@@ -1,3 +1,9 @@
 <Solution>
-  <Project Path="CustomerManagement.csproj" />
+  <Folder Name="/Tools/">
+    <Project Path="../CustomerExport/CustomerExport.csproj" />
+    <Project Path="../CustomerImport/CustomerImport.csproj" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="CustomerManagement.csproj" />
+  </Folder>
 </Solution>
