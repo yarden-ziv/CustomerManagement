@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <Id>3</Id>
+    <FullNameHeb>ישראל כהן</FullNameHeb>
+    <FullNameEng>Israel Cohen</FullNameEng>
+    <BirthDate>2008-07-17T00:00:00</BirthDate>
+    <IdNumber>123123123</IdNumber>
+    <CityId>4</CityId>
+    <City>
+      <Id>4</Id>
+      <Name>באר שבע</Name>
+    </City>
+    <BankId>10</BankId>
+    <BranchId>932</BranchId>
+    <AccountNumber>1231231231</AccountNumber>
+  </Customer>
+  <Customer>
+    <Id>4</Id>
+    <FullNameHeb>שובי דובי</FullNameHeb>
+    <FullNameEng>Shoobi Doobi</FullNameEng>
+    <BirthDate>1947-07-23T00:00:00</BirthDate>
+    <IdNumber>112233445</IdNumber>
+    <CityId>2</CityId>
+    <City>
+      <Id>2</Id>
+      <Name>תל אביב</Name>
+    </City>
+    <BankId>18</BankId>
+    <BranchId>1</BranchId>
+    <AccountNumber>0101010101</AccountNumber>
+  </Customer>
+  <Customer>
+    <Id>5</Id>
+    <FullNameHeb>ירדן זיו</FullNameHeb>
+    <FullNameEng>Yarden Ziv</FullNameEng>
+    <BirthDate>1990-07-20T00:00:00</BirthDate>
+    <IdNumber>445566998</IdNumber>
+    <CityId>5</CityId>
+    <City>
+      <Id>5</Id>
+      <Name>אשדוד</Name>
+    </City>
+    <BankId>14</BankId>
+    <BranchId>397</BranchId>
+    <AccountNumber>1112223334</AccountNumber>
+  </Customer>
+  <Customer>
+    <Id>6</Id>
+    <FullNameHeb>בדיקה בדיקוביץ'</FullNameHeb>
+    <FullNameEng>Bdika Bdikovitc</FullNameEng>
+    <BirthDate>2025-12-03T00:00:00</BirthDate>
+    <IdNumber>454545454</IdNumber>
+    <CityId>3</CityId>
+    <City>
+      <Id>3</Id>
+      <Name>חיפה</Name>
+    </City>
+    <BankId>54</BankId>
+    <BranchId>1</BranchId>
+    <AccountNumber>6546546546</AccountNumber>
+  </Customer>
+</ArrayOfCustomer>
