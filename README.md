@@ -1,4 +1,5 @@
-Customer Management System (ASP.NET MVC + SQL + XML Tools)
+## **Customer Management System** 
+(ASP.NET MVC + SQL + XML Tools)
 
 A multi-project solution built with ASP.NET MVC (.NET 10), Entity Framework Core, SQL Server, and XML serialization.
 The system includes:
@@ -36,9 +37,8 @@ CustomerManagement/
     ├── Program.cs
     └── CustomerImport.csproj
 ```
+### **Features:**
 
-
-Features
 ASP.NET MVC Web Application
 
 Create new customers
@@ -62,7 +62,7 @@ Customers and Cities tables
 Configurable connection string (appsettings.json)
 
 
-Stored Procedure:
+**Stored Procedure:**
 
 GetAllCustomers ->
 
@@ -77,7 +77,7 @@ https://www.xnes.co.il/ClosedSystemMiddlewareApi/api/generalinformation
 This keeps the bank/branch list always up to date.
 
 
-XML Export Tool (Console App):
+**XML Export Tool (Console App):**
 
 CustomerExport loads all customers from the database and generates:
 
@@ -90,7 +90,7 @@ All customer fields
 Related city data
 
 
-XML Import Tool (Console App):
+**XML Import Tool (Console App):**
 
 CustomerImport reads the customers.xml file and prints all entries to the console.
 
@@ -99,8 +99,7 @@ customers.xml need to placed inside the root folder of "CustomerImport"
 Note: Hebrew prints reversed in Windows console — this is a known limitation of cmd/PowerShell, not of the data.
 
 
-**running instructions**
-
+### **running instructions:**
 1. Prerequisites
 
 You need:
@@ -158,7 +157,7 @@ Reads and prints customers.xml.
 CustomerImport → Set as Startup Project → F5
 
 
-Testing
+### **Testing:**
 
 Create customers in the Web App
 
@@ -173,7 +172,7 @@ Test invalid inputs (future dates, incorrect ID format)
 Simulate API failures (banks/branches unavailable)
 
 
-Technologies Used
+### **Technologies Used:**
 
 ASP.NET MVC (.NET 10)
 
@@ -191,7 +190,7 @@ External REST API
 
 Stored Procedures
 
-📌 Notes
+**📌 Notes**
 
 Console apps do not modify the database
 
