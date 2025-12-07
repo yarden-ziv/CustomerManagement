@@ -1,132 +1,130 @@
 ﻿@model CustomerManagement.ViewModels.CreateCustomerViewModel
 
-@{
-    ViewData["Title"] = "Create Customer";
-}
+<style>
+    .form-control, .form-select {
+        background-color: #ffffff !important;
+        border: 1px solid #c7cfdb !important;
+        height: 45px;
+    }
 
-<h2>צור לקוח חדש</h2>
+    .form-label {
+        font-weight: 600;
+        color: #1A3C6E;
+    }
+</style>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Success"]
-    </div>
-}
+<div class="container mt-4 mb-4" style="direction: rtl; text-align:right;">
 
-<form asp-action="Create" method="post">
+    <h2 class="mb-2" style="color:white;">הוספת לקוח חדש</h2>
+    <div style="width:250px; height:4px; background-color:#FF6A00; margin-bottom:25px; border-radius:2px;"></div>
 
-    <!-- Hebrew Full Name -->
-    <div class="mb-3">
-        <label asp-for="FullNameHeb" class="form-label"></label>
-        <input asp-for="FullNameHeb" class="form-control" />
-        <span asp-validation-for="FullNameHeb" class="text-danger"></span>
-    </div>
+    <div class="d-flex justify-content-center">
+        <div style="width:650px;">
+            <div class="card shadow p-3" style="background-color:#f7f9fc; border:1px solid #d0d7e2;">
 
-    <!-- English Full Name -->
-    <div class="mb-3">
-        <label asp-for="FullNameEng" class="form-label"></label>
-        <input asp-for="FullNameEng" class="form-control" />
-        <span asp-validation-for="FullNameEng" class="text-danger"></span>
-    </div>
+        <form asp-action="Create">
 
-    <!-- Birth Date -->
-    <div class="mb-3">
-        <label asp-for="BirthDate" class="form-label"></label>
-        <input asp-for="BirthDate" type="date" max='@DateTime.Now.ToString("yyyy-MM-dd")' class="form-control" />
-        <span asp-validation-for="BirthDate" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">שם מלא (עברית)</label>
+                <input asp-for="FullNameHeb" class="form-control" />
+                <span asp-validation-for="FullNameHeb" class="text-danger"></span>
+            </div>
 
-    <!-- ID Number -->
-    <div class="mb-3">
-        <label asp-for="IdNumber" class="form-label"></label>
-        <input asp-for="IdNumber" maxlength="9" class="form-control" />
-        <span asp-validation-for="IdNumber" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">שם מלא (אנגלית)</label>
+                <input asp-for="FullNameEng" class="form-control" />
+                <span asp-validation-for="FullNameEng" class="text-danger"></span>
+            </div>
 
-    <!-- City Dropdown -->
-    <div class="mb-3">
-        <label asp-for="CityId" class="form-label"></label>
-        <select asp-for="CityId" class="form-select"
-                asp-items="@(new SelectList(Model.Cities, "Id", "Name"))">
-            <option value="">-- בחר עיר --</option>
-        </select>
-        <span asp-validation-for="CityId" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">תאריך לידה</label>
+                <input asp-for="BirthDate" class="form-control" type="date" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
 
-    <!-- Bank Dropdown -->
-    <div class="mb-3">
-        <label asp-for="BankId" class="form-label"></label>
-        <select asp-for="BankId" class="form-select" id="bankDropdown">
-            <option value="">-- בחר בנק --</option>
-            @foreach (var bank in Model.Banks)
-            {
-                <option value="@bank.Code">@bank.Description</option>
-            }
-        </select>
-        <span asp-validation-for="BankId" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">תעודת זהות</label>
+                <input asp-for="IdNumber" class="form-control" maxlength="9" />
+                <span asp-validation-for="IdNumber" class="text-danger"></span>
+            </div>
 
-    <!-- Branch Dropdown -->
-    <div class="mb-3">
-        <label asp-for="BranchId" class="form-label"></label>
-        <select asp-for="BranchId" class="form-select" id="branchDropdown">
-            <option value="">-- בחר סניף --</option>
-            @if (Model.Branches != null)
-            {
-                foreach (var branch in Model.Branches)
-                {
-                    <option value="@branch.BranchNumber">@branch.BranchName</option>
-                }
-            }
-        </select>
-        <span asp-validation-for="BranchId" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">עיר</label>
+                <select asp-for="CityId" class="form-select">
+                    <option value="">בחר עיר</option>
+                    @foreach (var city in Model.Cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
 
-    <!-- Account Number -->
-    <div class="mb-3">
-        <label asp-for="AccountNumber" class="form-label"></label>
-        <input asp-for="AccountNumber" maxlength="10" class="form-control" />
-        <span asp-validation-for="AccountNumber" class="text-danger"></span>
-    </div>
+            <div class="mb-2">
+                <label class="form-label">בנק</label>
+                <select asp-for="BankId" id="bankSelect" class="form-select">
+                    <option value="">בחר בנק</option>
+                    @foreach (var bank in Model.Banks)
+                    {
+                        <option value="@bank.Code">@bank.Description</option>
+                    }
+                </select>
 
-    <button type="submit" class="btn btn-primary">שמור פרטי לקוח</button>
+                <span asp-validation-for="BankId" class="text-danger"></span>
+            </div>
 
-</form>
+            <div class="mb-2">
+                <label class="form-label">סניף</label>
+                <select asp-for="BranchId" id="branchSelect" class="form-select">
+                    <option value="">בחר סניף</option>
+                </select>
+                <span asp-validation-for="BranchId" class="text-danger"></span>
+            </div>
 
+            <div class="mb-2">
+                <label class="form-label">מספר חשבון</label>
+                <input asp-for="AccountNumber" class="form-control" maxlength="12" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
 
-<a href="/Customers/List" class="btn btn-back mt-3">חזרה לרשימת לקוחות</a>
+            <div class="d-flex justify-content-between mt-4">
 
+                <button type="submit" class="btn"
+                        style="background-color:#FF6A00; color:white; width:150px;">
+                    שמירה
+                </button>
+
+                <a href="/Customers/List"
+                   class="btn"
+                   style="background-color:#1A3C6E; color:white; width:150px;">
+                    חזרה לרשימה
+                </a>
+
+            </div>
+
+        </form>
+
+            </div> <!-- card -->
+        </div> <!-- fixed width -->
+    </div> <!-- centered container -->
+</div> <!-- blue background container -->
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        document.getElementById("bankDropdown").addEventListener("change", async function () {
+        document.getElementById("bankSelect").addEventListener("change", function () {
             const bankCode = this.value;
-            const branchDropdown = document.getElementById("branchDropdown");
 
-            // Always reset the dropdown to a clean state
-            branchDropdown.innerHTML = "<option value=''>-- בחר סניף --</option>";
+            fetch(`/Customers/GetBranches?bankCode=${bankCode}`)
+                .then(response => response.json())
+                .then(data => {
+                    const branchSelect = document.getElementById("branchSelect");
+                    branchSelect.innerHTML = '<option value="">בחר סניף</option>';
 
-            // No bank selected → keep clean default state
-            if (!bankCode) {
-                branchDropdown.disabled = false; 
-                return;
-            }
-
-            // Call server for branches
-            const response = await fetch(`/Customers/GetBranches?bankCode=${bankCode}`);
-            const branches = await response.json();
-
-             // Sort branches alphabetically by name
-            branches.sort((a, b) => a.branchName.localeCompare(b.branchName));
-
-            // Populate branches safely
-            branches.forEach(b => {
-                branchDropdown.insertAdjacentHTML(
-                    "beforeend",
-                    `<option value="${b.branchNumber}">${b.branchName}</option>`
-                );
-            });
+                    data.forEach(branch => {
+                        branchSelect.innerHTML += `<option value="${branch.branchNumber}">${branch.branchName}</option>`;
+                    });
+                });
         });
     </script>
 }
