@@ -11,10 +11,10 @@
         ➕ הוסף לקוח חדש
     </a>
 
-    @if (TempData["SuccessMessage"] != null)
+    @if (TempData["Success"] != null)
     {
         <div id="successMsg" class="alert alert-success">
-            @TempData["SuccessMessage"]
+            @TempData["Success"]
         </div>
 
         <script>

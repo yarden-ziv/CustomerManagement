@@ -60,4 +60,49 @@
     <BranchId>1</BranchId>
     <AccountNumber>6546546546</AccountNumber>
   </Customer>
+  <Customer>
+    <Id>7</Id>
+    <FullNameHeb>משה כהן</FullNameHeb>
+    <FullNameEng>Moshe Cohen</FullNameEng>
+    <BirthDate>2015-11-18T00:00:00</BirthDate>
+    <IdNumber>123123123</IdNumber>
+    <CityId>3</CityId>
+    <City>
+      <Id>3</Id>
+      <Name>חיפה</Name>
+    </City>
+    <BankId>46</BankId>
+    <BranchId>520</BranchId>
+    <AccountNumber>1234564567</AccountNumber>
+  </Customer>
+  <Customer>
+    <Id>8</Id>
+    <FullNameHeb>בדיקת הודעה</FullNameHeb>
+    <FullNameEng>message</FullNameEng>
+    <BirthDate>2009-11-11T00:00:00</BirthDate>
+    <IdNumber>778899666</IdNumber>
+    <CityId>5</CityId>
+    <City>
+      <Id>5</Id>
+      <Name>אשדוד</Name>
+    </City>
+    <BankId>12</BankId>
+    <BranchId>72</BranchId>
+    <AccountNumber>7894561231</AccountNumber>
+  </Customer>
+  <Customer>
+    <Id>9</Id>
+    <FullNameHeb>גכעגכדעכ</FullNameHeb>
+    <FullNameEng>gdfdfg</FullNameEng>
+    <BirthDate>1998-02-01T00:00:00</BirthDate>
+    <IdNumber>164637427</IdNumber>
+    <CityId>4</CityId>
+    <City>
+      <Id>4</Id>
+      <Name>באר שבע</Name>
+    </City>
+    <BankId>12</BankId>
+    <BranchId>115</BranchId>
+    <AccountNumber>4687578687</AccountNumber>
+  </Customer>
 </ArrayOfCustomer>
